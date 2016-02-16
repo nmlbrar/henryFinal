@@ -9,12 +9,13 @@
         <input id="username" type="text" placeholder="username"/>
         <input id="password" type="text" placeholder="password"/>
         <button id="login">Login</button>
-        
+        </br>
         <input id="description" type="text" placeholder="product description"/>
         <input id="destination" type="text" placeholder="destination"/>
         <input id="currentPlace" type="text" placeholder="currentPlace"/>
         <button id="post">Post</button>
         <button id="get">Get</button>
+        <div id="update"></div><button id="update_but">update value</button>
     </body>
     
     <script>
@@ -40,7 +41,31 @@
                         user_id = resp[0].id; 
             }
         });
+    }
+            
+            
+            document.getElementById("update_but").onclick = function(){
+                console.log(this.dataset);
+                        var h3_id =  this.dataset.h3id;
+                        
+                        $.ajax({
+                                    url:"../controller/posting.php",
+                                    dataType:"json",
+                                    data:{
+                                        method:"update",
+                                        id:h3_id,
+                                        description:document.getElementById("inputh3").value,
+                                    },
+                                    type:"POST",
+                                    success:function(resp){
+                                        alert("updated");
+                                    }
+                                });
+                
+                
+                
             }
+            
             
             document.getElementById("post").onclick = function(){
                 
@@ -64,7 +89,7 @@
                 
               }
             
-            document.getElementById("get").onclick = function(){
+             document.getElementById("get").onclick = function(){
                  $.ajax({
                     url:"../controller/posting.php",
                     dataType:"json",
@@ -78,8 +103,21 @@
                         console.log(resp);
                         for(var i=0; i<resp.length; i++){
                             var h3=document.createElement("h3");
-                            h3.innerHTML =resp[i].description+" | "+resp[i].destination+" | "+resp[i].currentPlace+" | "+resp[i].user_id;
+                            h3.innerHTML =resp[i].description+" | "+resp[i].destination+" | "+resp[i].currentPlace;
                             document.body.appendChild(h3);
+                            h3.dataset.id = resp[i].id;
+                            console.log(resp[i]);
+                            h3.onclick = function(){
+                                
+                                var inputh3 = document.createElement("input");
+                                inputh3.id = "inputh3";
+                                inputh3.value = this.innerHTML;
+                                document.getElementById("update").innerHTML = "";
+                                document.getElementById("update").appendChild(inputh3);
+                                console.log(this.dataset);
+                                document.getElementById("update_but").dataset.h3id = this.dataset.id;
+                         
+                            }
                         }
                     }
                 });

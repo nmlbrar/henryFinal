@@ -8,4 +8,9 @@ if($_POST['method'] == "postall"){
 if($_POST['method'] == "getall"){
     get_orders();
 }
+
+if($_POST['method'] == "update"){
+    update_order();
+}
+
 ?>

@@ -11,10 +11,18 @@ function post_order(){
 
 function get_orders(){
     global $db;
-    $query = "SELECT postings.description, postings.destination, postings.currentPlace, postings.user_id FROM postings
-                LEFT JOIN users ON users.id = postings.user_id";
+    $query = "SELECT postings.description, postings.destination, postings.currentPlace, postings.id FROM postings
+              LEFT JOIN users ON users.id = postings.user_id";
     $result = $db->query($query);
     echo json_encode($result->fetchAll());
 }
+
+function update_order(){
+    global $db;
+    $query = "UPDATE postings SET description = '".$_POST['description']."' WHERE id =".$_POST['id']."";
+    echo $query;
+    $result = $db->query($query);
+}
+
 
 ?>
