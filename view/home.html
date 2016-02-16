@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    
+    <body>
+        <input id="username" type="text" placeholder="username"/>
+        <input id="password" type="text" placeholder="password"/>
+        <button id="login">Login</button>
+    </body>
+    
+    <script>
+        $(document).ready(function(){
+            //click function for the submit button
+            document.getElementById("login").onclick = function(){
+                
+                //sending login info to the user.php
+                $.ajax({
+                    url:"../controller/user.php",
+                    type:"post",
+                    dataType:"json",
+                    data: {
+                        method:"login",
+                        username: document.getElementById("username").value,
+                        password: document.getElementById("password").value,
+                        
+                    },
+                    success:function(resp){
+                        alert("INSERT");
+                        console.log(resp);
+                        user_id = resp[0].id; 
+            }
+        });
+            }
+        });
+    </script>
+</html>
