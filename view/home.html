@@ -9,10 +9,17 @@
         <input id="username" type="text" placeholder="username"/>
         <input id="password" type="text" placeholder="password"/>
         <button id="login">Login</button>
+        
+        <input id="description" type="text" placeholder="product description"/>
+        <input id="destination" type="text" placeholder="destination"/>
+        <input id="currentPlace" type="text" placeholder="currentPlace"/>
+        <button id="post">Post</button>
+        <button id="get">Get</button>
     </body>
     
     <script>
         $(document).ready(function(){
+            var user_id = -1;
             //click function for the submit button
             document.getElementById("login").onclick = function(){
                 
@@ -33,6 +40,50 @@
                         user_id = resp[0].id; 
             }
         });
+            }
+            
+            document.getElementById("post").onclick = function(){
+                
+                //sending login info to the user.php
+                $.ajax({
+                    url:"../controller/posting.php",
+                    type:"post",
+                    dataType:"html",
+                    data: {
+                        method:"postall",
+                        description: document.getElementById("description").value,
+                        destination: document.getElementById("destination").value,
+                        currentPlace: document.getElementById("currentPlace").value,
+                        user_id: user_id
+                    },
+                    success:function(resp){
+                        alert("INSERT");
+                        console.log(resp);
+            }
+        });
+                
+              }
+            
+            document.getElementById("get").onclick = function(){
+                 $.ajax({
+                    url:"../controller/posting.php",
+                    dataType:"json",
+                    type:"POST",
+                    data:{
+                        method:"getall",
+                    },
+                    
+                    success:function(resp){
+                        alert("Get!");
+                        console.log(resp);
+                        for(var i=0; i<resp.length; i++){
+                            var h3=document.createElement("h3");
+                            h3.innerHTML =resp[i].description+" | "+resp[i].destination+" | "+resp[i].currentPlace+" | "+resp[i].user_id;
+                            document.body.appendChild(h3);
+                        }
+                    }
+                });
+                
             }
         });
     </script>

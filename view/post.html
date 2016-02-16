@@ -27,7 +27,8 @@
                         method:"postall",
                         description: document.getElementById("description").value,
                         destination: document.getElementById("destination").value,
-                        currentPlace: document.getElementById("currentPlace").value, 
+                        currentPlace: document.getElementById("currentPlace").value,
+                        user_id:user_id
                     },
                     success:function(resp){
                         alert("INSERT");
@@ -52,7 +53,7 @@
                         console.log(resp);
                         for(var i=0; i<resp.length; i++){
                             var h3=document.createElement("h3");
-                            h3.innerHTML =resp[i].description+" | "+resp[i].destination+" | "+resp[i].currentPlace;
+                            h3.innerHTML =resp[i].description+" | "+resp[i].destination+" | "+resp[i].currentPlace+" | "+resp[i].user_id;
                             document.body.appendChild(h3);
                         }
                     }
