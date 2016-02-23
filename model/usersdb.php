@@ -16,10 +16,12 @@ function get_users(){
 function get_user_by_username_password(){
     //this will grab user based on username and password
     global $db;
-    $query = "SELECT id FROM users WHERE username = '".$_POST['username']."' and password = '".$_POST['password']."'";
+    $query = "SELECT id, username FROM users WHERE username = '".$_POST['username']."' and password = '".$_POST['password']."'";
     
     $result = $db->query($query);
     echo json_encode($result->fetchAll());
+    
+    
 }
 
 function update_user(){

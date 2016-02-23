@@ -12,7 +12,7 @@ function post_order(){
 function get_orders(){
     global $db;
     $query = "SELECT postings.description, postings.destination, postings.currentPlace, postings.id FROM postings
-              LEFT JOIN users ON users.id = postings.user_id";
+              LEFT JOIN users ON users.id = postings.user_id WHERE user_id =".$_POST['user_id']."";
     $result = $db->query($query);
     echo json_encode($result->fetchAll());
 }

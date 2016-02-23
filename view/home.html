@@ -10,12 +10,12 @@
         <input id="password" type="text" placeholder="password"/>
         <button id="login">Login</button>
         <br>
-        <input id="description" type="text" placeholder="product description"/>
+        <!--<input id="description" type="text" placeholder="product description"/>
         <input id="destination" type="text" placeholder="destination"/>
         <input id="currentPlace" type="text" placeholder="currentPlace"/>
-        <!--button id="post">Post</button>-->
-        <!--<button id="get">Get</button>-->
-        <!--<div id="update"></div><button id="update_but">update value</button>-->
+        <button id="post">Post</button>
+        <button id="get">Get</button>
+        <div id="update"></div><button id="update_but">update value</button>-->
     </body>
     
     <script>
@@ -39,16 +39,34 @@
                         console.log(resp);
                         user_id = resp[0].id;
                         
-                        //buttons to get, update and post the posting
+                        
+                        //input boxes for the postings
+                        var description = document.createElement("input");
+                        description.placeholder = "product description";
+                        description.id = "description";
+                        document.body.appendChild(description);
+                        
+                        var destination = document.createElement("input");
+                        destination.placeholder = "destination";
+                        destination.id = "destination";
+                        document.body.appendChild(destination);
+                        
+                        var currentPlace = document.createElement("input");
+                        currentPlace.placeholder = "Current Place";
+                        currentPlace.id = "currentPlace";
+                        document.body.appendChild(currentPlace);
+                        
+                        //buttons to get, update,delete and post the posting
+                        var postBtn = document.createElement("button");
+                        postBtn.innerHTML = "POST";
+                        postBtn.id = "post";
+                        document.body.appendChild(postBtn);
+                        
                         var getBtn = document.createElement("button");
                         getBtn.innerHTML = "GET POSTS";
                         getBtn.id = "get";
                         document.body.appendChild(getBtn);
                         
-                        var postBtn = document.createElement("button");
-                        postBtn.innerHTML = "POST";
-                        postBtn.id = "post";
-                        document.body.appendChild(postBtn);
                         
                         var updateDiv = document.createElement("div");
                         updateDiv.id = "update";
@@ -59,6 +77,28 @@
                         document.body.appendChild(updateDiv);
                         
                         //ajax call to get the posts form the database
+                        
+                        //ajax call to post a post
+                        document.getElementById("post").onclick = function(){
+                            $.ajax({
+                                url:"../controller/posting.php",
+                                type:"post",
+                                dataType:"html",
+                                data: {
+                                    method:"postall",
+                                    description: document.getElementById("description").value,
+                                    destination: document.getElementById("destination").value,
+                                    currentPlace: document.getElementById("currentPlace").value,
+                                    user_id: user_id
+                                },
+                                success:function(resp){
+                                    alert("INSERT");
+                                    console.log(resp);
+                                }
+                            });
+                
+                        }
+                        
                         document.getElementById("get").onclick = function(){
                             $.ajax({
                                 url:"../controller/posting.php",
@@ -66,6 +106,7 @@
                                 type:"POST",
                                 data:{
                                     method:"getall",
+                                    user_id:user_id
                                 },
 
                                 success:function(resp){
@@ -89,27 +130,6 @@
 
                                         }
                                     }
-                                }
-                            });
-                
-                        }
-                        
-                        //ajax call to post a post
-                        document.getElementById("post").onclick = function(){
-                            $.ajax({
-                                url:"../controller/posting.php",
-                                type:"post",
-                                dataType:"html",
-                                data: {
-                                    method:"postall",
-                                    description: document.getElementById("description").value,
-                                    destination: document.getElementById("destination").value,
-                                    currentPlace: document.getElementById("currentPlace").value,
-                                    user_id: user_id
-                                },
-                                success:function(resp){
-                                    alert("INSERT");
-                                    console.log(resp);
                                 }
                             });
                 
