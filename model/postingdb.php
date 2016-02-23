@@ -17,6 +17,14 @@ function get_orders(){
     echo json_encode($result->fetchAll());
 }
 
+function get_allorders(){
+    global $db;
+    $query = "SELECT postings.description, postings.destination, postings.currentPlace, postings.id FROM postings
+              LEFT JOIN users ON users.id = postings.user_id";
+    $result = $db->query($query);
+    echo json_encode($result->fetchAll());
+}
+
 function update_order(){
     global $db;
     $query = "UPDATE postings SET description = '".$_POST['description']."' WHERE id =".$_POST['id']."";
