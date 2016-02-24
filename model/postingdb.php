@@ -1,6 +1,8 @@
 <?php
 include("connection.php");
 
+
+
 function post_order(){
     //insert info in the users table
     global $db;    
@@ -19,7 +21,7 @@ function get_orders(){
 
 function get_allorders(){
     global $db;
-    $query = "SELECT postings.description, postings.destination, postings.currentPlace, postings.id FROM postings
+    $query = "SELECT postings.description, postings.destination, postings.currentPlace, postings.id, postings.user_id FROM postings
               LEFT JOIN users ON users.id = postings.user_id";
     $result = $db->query($query);
     echo json_encode($result->fetchAll());

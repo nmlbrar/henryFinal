@@ -1,6 +1,8 @@
 <?php
 include("connection.php");
 
+
+
 function insert_user(){
     //insert info in the users table
     global $db;
@@ -14,6 +16,7 @@ function get_users(){
 }
 
 function get_user_by_username_password(){
+
     //this will grab user based on username and password
     global $db;
     $query = "SELECT id, username FROM users WHERE username = '".$_POST['username']."' and password = '".$_POST['password']."'";
@@ -21,7 +24,7 @@ function get_user_by_username_password(){
     $result = $db->query($query);
     echo json_encode($result->fetchAll());
     
-    
+
 }
 
 function update_user(){
