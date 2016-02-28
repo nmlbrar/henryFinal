@@ -1,7 +1,12 @@
 /*styling the posting*/
 #display {
     color: darkorange;
+    margin-left: 10%;
+    margin-top: 2%;
 }
-#heading {
-    color: red;
+
+.headingDiv {
+    color: mediumseagreen;
+    margin-left: 30%;
+    margin-right: 30%;
 }

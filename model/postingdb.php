@@ -21,7 +21,7 @@ function get_orders(){
 
 function get_allorders(){
     global $db;
-    $query = "SELECT postings.description, postings.destination, postings.currentPlace, postings.id, postings.user_id FROM postings
+    $query = "SELECT postings.description, postings.destination, postings.currentPlace, postings.id, users.username FROM postings
               LEFT JOIN users ON users.id = postings.user_id";
     $result = $db->query($query);
     echo json_encode($result->fetchAll());
