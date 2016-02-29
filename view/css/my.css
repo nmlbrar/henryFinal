@@ -10,3 +10,88 @@
     margin-left: 30%;
     margin-right: 30%;
 }
+
+
+/* style for the profile page*/
+
+.body {
+    background-image: url(../img/bg.jpg);
+    background-repeat: no-repeat;
+}
+
+.leftDiv {
+    position: fixed;
+    height: 650px;
+    width: 15%;
+    left: 2%;
+    clear: right;
+    float: left;
+    background-color:darksalmon;
+    opacity: .4;
+    box-shadow: 1px 0px 20px #000;
+}
+.leftCon {
+    position: fixed;
+    height: 650px;
+    width: 15%;
+    left: 2%;
+    clear: right;
+    float: left;
+}
+.picDiv {
+    position: relative;
+    height: auto;
+    width: auto;
+    clear: both;
+    /*background-color: brown;*/
+}
+.profImg {
+    position:sticky;
+    width: 100%;
+}
+.profInfo {
+    position: relative;
+    width: auto;
+    height: 250px;
+    clear: both;
+    background-color: brown;
+}
+#profName {
+    text-align: center;
+    position: relative;
+    top: 15px;
+    padding: 10px;
+    clear: both;
+}
+#profLocation {
+    text-align: center;
+    position: relative;
+    top: 15px;
+    padding: 10px;
+}
+
+.rightDiv {
+    position: fixed;
+    height: 650px;
+    width: 80%;
+    right: 2%;
+    float: right;
+    background-color: darksalmon;
+    opacity: .4;
+    box-shadow: 1px 0px 20px #000;
+}
+.rightCon {
+    position: fixed;
+    height: 650px;
+    width: 80%;
+    right: 2%;
+    float: right;  
+}
+#postDiv {
+    position: relative;
+    width: 95%;
+    height: 95%;
+    margin: auto;
+    top: 2.5%;
+    text-align: center;
+}

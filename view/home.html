@@ -32,8 +32,9 @@
                         var table=document.createElement("table");
                         table.style.width = '50%';
                         table.setAttribute('border', '0');
-                        for (var i = 0; i<= resp.length; i++){
+                        for (var i = 0; i< resp.length; i++){
                             var tr  = document.createElement("tr");
+                            tr.className = "trClass";
                             var td = document.createElement("td");
                             var td1 = document.createElement("td");
                             var td2 = document.createElement("td");
@@ -42,13 +43,28 @@
                             td1.innerHTML =resp[i].destination;
                             td2.innerHTML =resp[i].currentPlace;
                             td3.innerHTML =resp[i].username;
-                            table.appendChild(td);
-                            table.appendChild(td1);
-                            table.appendChild(td2);
-                            table.appendChild(td3);
+                            tr.appendChild(td);
+                            tr.appendChild(td1);
+                            tr.appendChild(td2);
+                            tr.appendChild(td3);
                             table.appendChild(tr);
                             display.appendChild(table);
                         }
+                       /* $(".trClass").click(function(){
+                            console.log(this);
+                           $.ajax({
+                               url:"../controller/posting.php",
+                               dataType:"html",
+                               type:"POST",
+                               data:{
+                                   method:"postUser",
+                                   table:table
+                               },
+                               success:function(resp1){
+                                   alert(resp1);
+                               }
+                           });
+                        });/*
                         /*h3.innerHTML =resp[i].description+" | "+resp[i].destination+" | "+resp[i].currentPlace+" | "+resp[i].user_id;
                         display.appendChild(h3);
                         display.dataset.id = resp[i].id;
@@ -56,8 +72,9 @@
 
                     }
                 }
-                });
             });
+      
+        });
        
     </script>
 </html>

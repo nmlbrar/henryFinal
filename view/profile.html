@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <title>Profile</title>
+        <!--linking CSS-->
+        <link rel="stylesheet" type="text/css" href="css/my.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    </head>
+    <body class="body">
+        <input id="username" type="text" placeholder="username"/>
+        <input id="password" type="text" placeholder="password"/>
+        <button id="login">Login</button>
+        <script>
+            $(document).ready(function(){
+                var user_id = -1;
+                //click function for the submit button
+                document.getElementById("login").onclick = function(){
+                
+                    //sending login info to the user.php
+                    $.ajax({
+                        url:"../controller/user.php",
+                        type:"post",
+                        dataType:"json",
+                        data: {
+                            method:"login",
+                            username: document.getElementById("username").value,
+                            password: document.getElementById("password").value,
+                        
+                        },
+                        success:function(resp){
+                        console.log(resp);
+                        user_id = resp[0].id;
+                            
+                    // creating div for body and content
+                    var leftDiv = document.createElement("div");
+                    leftDiv.className = "leftDiv";
+                    document.body.appendChild(leftDiv);
+
+                    // div for the content in left div
+                    var leftCon = document.createElement("div");
+                    leftCon.className = "leftCon";
+                    document.body.appendChild(leftCon);
+
+                    // right div
+                    var rightDiv = document.createElement("div");
+                    rightDiv.className = "rightDiv";
+                    document.body.appendChild(rightDiv);
+
+                    // div for the content in right div
+                    var rightCon = document.createElement("div");
+                    rightCon.className = "rightCon";
+                    document.body.appendChild(rightCon);
+
+
+                    //content for the leftCon div
+                    var picDiv = document.createElement("div");
+                    picDiv.className = "picDiv";
+                    var profImg = document.createElement("img");
+                    profImg.className = "profImg";
+                    profImg.setAttribute("src", "./img/profilePicture.png");
+                    profImg.setAttribute("alt", "profilePicture");
+                    picDiv.appendChild(profImg);
+                    leftCon.appendChild(picDiv);
+
+                    var profInfo = document.createElement("div");
+                    profInfo.className = "profInfo";
+                    var profName = document.createElement("h3");
+                    profName.id = "profName";
+                    profName.innerHTML =  document.getElementById("username").value;
+                    profInfo.appendChild(profName);
+
+                    var profLocation = document.createElement("h3");
+                    profLocation.id = "profLocation";
+                    profLocation.innerHTML = "Vancouver";
+                    profInfo.appendChild(profLocation);
+                    leftCon.appendChild(profInfo);
+
+
+                    //content for the right div  which are the postings
+                    var postDiv = document.createElement("div");
+                    postDiv.id = "postDiv";
+                    rightCon.appendChild(postDiv);
+
+                
+                                               console.log("here");
+                    $.ajax({
+                        url:"../controller/posting.php",
+                        dataType:"json",
+                        type:"POST",
+                        data:{
+                            method:"getall",
+                            user_id:user_id
+                        },
+
+                        success:function(resp){
+                            console.log(resp);
+                            for(var i=0; i<resp.length; i++){
+                                document.getElementById("display");
+                                var table=document.createElement("table");
+                                table.style.width = '50%';
+                                table.setAttribute('border', '0');
+                                for (var i = 0; i< resp.length; i++){
+                                    var tr  = document.createElement("tr");
+                                    tr.className = "trClass";
+                                    var td = document.createElement("td");
+                                    var td1 = document.createElement("td");
+                                    var td2 = document.createElement("td");
+                                    var td3 = document.createElement("td");
+                                    td.innerHTML = resp[i].description;
+                                    td1.innerHTML =resp[i].destination;
+                                    td2.innerHTML =resp[i].currentPlace;
+                                    td3.innerHTML =resp[i].username;
+                                    tr.appendChild(td);
+                                    tr.appendChild(td1);
+                                    tr.appendChild(td2);
+                                    tr.appendChild(td3);
+                                    table.appendChild(tr);
+                                    postDiv.appendChild(table);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    });
+      </script>
+   </body>
+</html>
