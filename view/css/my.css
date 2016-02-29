@@ -95,3 +95,33 @@
     top: 2.5%;
     text-align: center;
 }
+.userLogin {
+    margin: 0 auto;
+    position: relative;
+    width: 350px;
+    height: 500px;
+    box-shadow: 5px 5px 25px grey;
+}
+
+.userLogin1 {
+    margin: 0 auto;
+    position: relative;
+    width: 350px;
+    height: 500px;
+    top: 240px;
+    left: 45px;
+}
+
+#login {
+    margin: 0 auto;
+    position: relative;
+    width: 72%;
+    
+}
+
+#username {
+    text-align: center;
+}
+#password {
+    text-align: center;
+}
