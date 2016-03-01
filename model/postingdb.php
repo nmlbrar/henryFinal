@@ -29,10 +29,12 @@ function get_allorders(){
 
 function update_order(){
     global $db;
-    $query = "UPDATE postings SET description = '".$_POST['description']."' WHERE id =".$_POST['id']."";
+    $query = "  UPDATE postings 
+                SET description = '".$_POST['description']."',
+                destination = '".$_POST['destination']."',
+                currentPlace = '".$_POST['currentPlace']."' WHERE id =".$_POST['id']."";
     echo $query;
     $result = $db->query($query);
 }
-
 
 ?>
