@@ -8,4 +8,12 @@ if($_POST['method'] == "insert"){
 if($_POST['method'] == "login"){
     get_user_by_username_password();
 }
+
+if($_POST['method'] == "checkLogin"){
+    checkLogin();
+}
+
+if($_POST['method'] == "getUser"){
+    getUser();
+}
 ?>

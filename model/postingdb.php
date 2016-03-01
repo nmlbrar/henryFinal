@@ -1,7 +1,7 @@
 <?php
 include("connection.php");
 
-
+session_start();
 
 function post_order(){
     //insert info in the users table
@@ -14,7 +14,7 @@ function post_order(){
 function get_orders(){
     global $db;
     $query = "SELECT postings.description, postings.destination, postings.currentPlace, postings.id, users.username FROM postings
-              LEFT JOIN users ON users.id = postings.user_id WHERE user_id =".$_POST['user_id']."";
+              LEFT JOIN users ON users.id = postings.user_id WHERE user_id =".$_SESSION['id']."";
     $result = $db->query($query);
     echo json_encode($result->fetchAll());
 }

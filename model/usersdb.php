@@ -1,6 +1,6 @@
 <?php
 include("connection.php");
-
+session_start();
 
 
 function insert_user(){
@@ -22,17 +22,26 @@ function get_user_by_username_password(){
     $query = "SELECT id, username FROM users WHERE username = '".$_POST['username']."' and password = '".$_POST['password']."'";
     
     $result = $db->query($query);
-    echo json_encode($result->fetchAll());
     
-
+    $shot = $result->fetchAll();
+    $_SESSION['id'] = $shot[0]['id'];
+    
+    
+    echo json_encode($_SESSION['id']);
+    
+    
 }
 
-function update_user(){
-    //uddae info of users from the users table
+function checkLogin(){
+    echo json_encode($_SESSION['id']);
 }
 
-function delete_user(){
+function getUser(){
+    global $db;
+    $query = "SELECT * FROM users WHERE id = '".$_SESSION['id']."'";
+    $result = $db->query($query);
     //remove a row of user from the users table
+    echo json_encode($result->fetchAll());
 }
 
 /*TESTING
