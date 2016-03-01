@@ -3,13 +3,23 @@
     <head>
         <title>Signup</title>
     </head>
+    <link rel="stylesheet" type="text/css" href="css/my.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     
-    <body>
-        <input id="username" type="text" placeholder="username"/>
-        <input id="password" type="text" placeholder="password"/>
-        <button id="sub">Submit</button>
-    </body>
+     <body class="body">
+        <div class="userLogin">
+            <div class="userLogin1">
+                <div class="logo">
+                <img class="doveImg" src="img/dove.png" alt="dove"/>
+                </div>
+                <input id="username" type="text" placeholder="username" autofocus/>
+                <input id="password" type="text" placeholder="password"/><br><br>
+                <button id="sub">Register</button>
+                <div class="placeholder"></div>
+                <a id="loginpage" href="./profile.html">Have an account?Login</a>
+            </div>
+        </div>
+
     
     <script>
         $(document).ready(function(){

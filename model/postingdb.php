@@ -6,7 +6,7 @@ session_start();
 function post_order(){
     //insert info in the users table
     global $db;    
-    $query = "INSERT INTO postings(description, destination, currentPlace, user_id) VALUES ('".$_POST['description']."','".$_POST['destination']."','".$_POST['currentPlace']."','".$_POST['user_id']."')";
+    $query = "INSERT INTO postings(description, destination, currentPlace, user_id) VALUES ('".$_POST['description']."','".$_POST['destination']."','".$_POST['currentPlace']."','".$_SESSION['id']."')";
     echo $query;
     $result = $db->query($query);
 }

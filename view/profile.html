@@ -21,11 +21,12 @@
                             method:"checkLogin",
                         },
                         success:function(resp){
-                            console.log(resp);
+                            console.log("resp");
+                           // console.log((resp == null));
                             if(resp > 0){
                             loggedIn();
                             }
-                            if(0==1){
+                            if(resp == "null"){
                                var newDiv = document.createElement("div"); 
                                newDiv.innerHTML = '<div class="userLogin"><div class="userLogin1"><div class="logo"><img class="doveImg" src="img/dove.png" alt="dove"/></div><input id="username" type="text" placeholder="username" autofocus/><input id="password" type="text" placeholder="password"/><br><br><button id="login">Login</button></div></div>'; document.body.appendChild(newDiv);
                                 
@@ -243,7 +244,7 @@
                                         description: document.getElementById("description").value,
                                         destination: document.getElementById("destination").value,
                                         currentPlace: document.getElementById("currentPlace").value,
-                                        user_id: user_id
+                                        user_id:user_id
                                     },
                                     success:function(resp){
                                         alert("INSERT");
