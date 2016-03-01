@@ -100,7 +100,7 @@
     position: relative;
     width: 350px;
     height: 500px;
-    box-shadow: 5px 5px 25px grey;
+    box-shadow: 5px 5px 25px #915271;
 }
 
 .userLogin1 {
@@ -124,4 +124,15 @@
 }
 #password {
     text-align: center;
+}
+.logo {
+    margin: 0 auto;
+    position: relative;
+    left: 20%;
+    bottom: 20%;
+}
+.doveImg {
+    height:auto;
+    width: 100px;
+    margin: 0 auto;
 }
