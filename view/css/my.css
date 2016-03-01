@@ -54,7 +54,7 @@
     width: auto;
     height: 250px;
     clear: both;
-    background-color: brown;
+    background-color: rgba(255,0,0,0.1);
 }
 #profName {
     text-align: center;

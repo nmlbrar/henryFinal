@@ -6,23 +6,31 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     </head>
     <body class="body">
-        <div class="userLogin">
-            <div class="userLogin1">
-                <div class="logo">
-                <img class="doveImg" src="img/dove.png" alt="dove"/>
-                </div>
-                <input id="username" type="text" placeholder="username" autofocus/>
-                <input id="password" type="text" placeholder="password"/><br><br>
-                <button id="login">Login</button>
-            </div>
-        </div>
+        
         
         <script>
             $(document).ready(function(){
                 var update = false;
                 var user_id = -1;
-                //click function for the submit button
-                document.getElementById("login").onclick = function(){
+                
+                $.ajax({
+                        url:"../controller/user.php",
+                        type:"post",
+                        dataType:"json",
+                        data: {
+                            method:"checkLogin",
+                        },
+                        success:function(resp){
+                            console.log(resp);
+                            if(resp > 0){
+                            loggedIn();
+                            }
+                            if(0==1){
+                               var newDiv = document.createElement("div"); 
+                               newDiv.innerHTML = '<div class="userLogin"><div class="userLogin1"><div class="logo"><img class="doveImg" src="img/dove.png" alt="dove"/></div><input id="username" type="text" placeholder="username" autofocus/><input id="password" type="text" placeholder="password"/><br><br><button id="login">Login</button></div></div>'; document.body.appendChild(newDiv);
+                                
+                                
+                                 document.getElementById("login").onclick = function(){
                 
                     //sending login info to the user.php
                     $.ajax({
@@ -36,11 +44,53 @@
                         },
                         success:function(resp){
                         console.log(resp);
-                        user_id = resp[0].id;
-                            console.log(resp[0].username);
-                    
-                            $(".userLogin").remove();
                             
+                         $(".userLogin").remove();
+                        loggedIn();
+                        }
+                    });
+                }
+                            }
+                        },error:function(resp){
+                            console.log(resp);
+                               var newDiv = document.createElement("div"); 
+                               newDiv.innerHTML = '<div class="userLogin"><div class="userLogin1"><div class="logo"><img class="doveImg" src="img/dove.png" alt="dove"/></div><input id="username" type="text" placeholder="username" autofocus/><input id="password" type="text" placeholder="password"/><br><br><button id="login">Login</button></div></div>'; document.body.appendChild(newDiv);
+                                
+                                
+                                 document.getElementById("login").onclick = function(){
+                
+                    //sending login info to the user.php
+                    $.ajax({
+                        url:"../controller/user.php",
+                        type:"post",
+                        dataType:"json",
+                        data: {
+                            method:"login",
+                            username: document.getElementById("username").value,
+                            password: document.getElementById("password").value, 
+                        },
+                        success:function(resp){
+                        console.log(resp);
+                            
+                         $(".userLogin").remove();
+                        loggedIn();
+                        }
+                    });
+                }
+                            
+                        }
+                });
+                //click function for the submit button
+               
+                var loggedIn = function(){
+                $.ajax({
+                        url:"../controller/user.php",
+                        type:"post",
+                        dataType:"json",
+                        data: {
+                            method:"getUser",
+                        },
+                        success:function(resp){
                             // creating div for body and content
                             var leftDiv = document.createElement("div");
                             leftDiv.className = "leftDiv";
@@ -150,7 +200,7 @@
                                     console.log(resp);
                                     if(resp.length > postLength||resp.length < postLength||update==true){
                                     update=false;
-                                        
+                                        var inputh3 = document.createElement("input");
                                         for(var i=0; i<resp.length; i++){
                                             postLength = resp.length;
                                             postDiv.innerHTML = "";
@@ -164,9 +214,9 @@
                                                 postDiv.appendChild(h3);
                                                 h3.dataset.id = resp[i].id;
                                                 console.log(resp[i]);
+                                                
                                                 h3.onclick = function(){
 
-                                                    var inputh3 = document.createElement("input");
                                                     inputh3.id = "inputh3";
                                                     inputh3.value = this.innerHTML;
                                                     //postDiv.innerHTML = "";
@@ -226,9 +276,11 @@
                                         alert("updated");
                                     }
                                 });
-                            }
-                        }
-                    });
+                            } 
+                },
+                });
+            
+                    
                 }
             });
       </script>
