@@ -19,9 +19,10 @@
                         dataType:"json",
                         data: {
                             method:"checkLogin",
+                             
                         },
                         success:function(resp){
-                            console.log("resp");
+                            console.log(resp);
                            // console.log((resp == null));
                             if(resp > 0){
                             loggedIn();
@@ -173,6 +174,11 @@
                             newPostDiv.appendChild(updateBut);
                             newPostDiv.appendChild(updateDiv);
                             
+                            var logoutBut = document.createElement("button");
+                            logoutBut.id = "logoutBut";
+                            logoutBut.innerHTML = "LOGOUT";
+                            newPostDiv.appendChild(logoutBut);
+                            
                             var deleteBut = document.createElement("button");
                             deleteBut.id = "deleteBut";
                             deleteBut.innerHTML = "Delete Button";
@@ -186,6 +192,9 @@
                             var postLength = 0;
 
                             console.log("here");
+                            document.getElementById("logoutBut").onclick = function(){
+                                 location.href = "../controller/logout.php";
+                            }
                             setInterval(function(){ 
                                
                             $.ajax({
@@ -199,8 +208,10 @@
 
                                 success:function(resp){
                                     console.log(resp);
+                                    console.log(update);
                                     if(resp.length > postLength||resp.length < postLength||update==true){
                                     update=false;
+                                        
                                         var inputh3 = document.createElement("input");
                                         for(var i=0; i<resp.length; i++){
                                             postLength = resp.length;
@@ -231,7 +242,7 @@
                                     }
                                 }
                             });
-                            },2000);
+                            },4000);
                             
                             //ajax call for posting the new post
                             document.getElementById("post").onclick = function(){

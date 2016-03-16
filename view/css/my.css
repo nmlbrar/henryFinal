@@ -138,12 +138,14 @@
 
 #username {
     text-align: center;
+    width: 38%;
     height:7%;
     border-radius:7px;
 }
 #password {
     text-align: center;
     height:7%;
+    width: 38%;
     border-radius:7px;
 }
 .logo {
