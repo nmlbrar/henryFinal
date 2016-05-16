@@ -130,11 +130,6 @@
                             profName.id = "profName";
                             profName.innerHTML = resp[0].username;
                             profInfo.appendChild(profName);
-
-                            var profLocation = document.createElement("h3");
-                            profLocation.id = "profLocation";
-                            profLocation.innerHTML = "Vancouver";
-                            profInfo.appendChild(profLocation);
                             leftCon.appendChild(profInfo);
 
 
@@ -177,7 +172,7 @@
                             var logoutBut = document.createElement("button");
                             logoutBut.id = "logoutBut";
                             logoutBut.innerHTML = "LOGOUT";
-                            newPostDiv.appendChild(logoutBut);
+                            leftCon.appendChild(logoutBut);
                             
                             var deleteBut = document.createElement("button");
                             deleteBut.id = "deleteBut";
@@ -222,6 +217,7 @@
                                             table.setAttribute('border', '0');
                                             for (var i = 0; i< resp.length; i++){
                                                 var h3=document.createElement("h3");
+                                                h3.id = "postH3";
                                                 h3.innerHTML =resp[i].description+" | "+resp[i].destination+" | "+resp[i].currentPlace;
                                                 postDiv.appendChild(h3);
                                                 h3.dataset.id = resp[i].id;
@@ -242,7 +238,7 @@
                                     }
                                 }
                             });
-                            },4000);
+                            },2000);
                             
                             //ajax call for posting the new post
                             document.getElementById("post").onclick = function(){

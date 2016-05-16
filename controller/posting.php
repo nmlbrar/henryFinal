@@ -9,6 +9,10 @@ if($_POST['method'] == "getall"){
     get_orders();
 }
 
+if($_POST['method'] == "getallbyID"){
+    get_ordersbyID();
+}
+
 if($_POST['method'] == "getallorders"){
     get_allorders();
 }

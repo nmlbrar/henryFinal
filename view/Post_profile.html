@@ -1,0 +1,176 @@
+<html>
+    <head>
+        <title>Profile</title>
+        <!--linking CSS-->
+        <link rel="stylesheet" type="text/css" href="css/my.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    </head>
+    <body class="body">
+        
+        
+        <script>
+            $(document).ready(function(){
+                console.log((window.location.search).replace('?',''));
+                var update = false;
+                var user_id = -1;
+                
+                $.ajax({
+                        url:"../controller/user.php",
+                        type:"post",
+                        dataType:"json",
+                        data: {
+                            method:"checkLogin",
+                             
+                        },
+                        success:function(resp){
+                            console.log(resp);
+                           // console.log((resp == null));
+                            if(resp > 0){
+                            loggedIn();
+                            }
+                            if(resp == "null"){
+                               var newDiv = document.createElement("div"); 
+                               newDiv.innerHTML = '<div class="userLogin"><div class="userLogin1"><div class="logo"><img class="doveImg" src="img/dove.png" alt="dove"/></div><input id="username" type="text" placeholder="username" autofocus/><input id="password" type="text" placeholder="password"/><br><br><button id="login">Login</button></div></div>'; document.body.appendChild(newDiv);
+                                
+                                
+                                 document.getElementById("login").onclick = function(){
+                
+                    //sending login info to the user.php
+                    $.ajax({
+                        url:"../controller/user.php",
+                        type:"post",
+                        dataType:"json",
+                        data: {
+                            method:"login",
+                            username: document.getElementById("username").value,
+                            password: document.getElementById("password").value, 
+                        },
+                        success:function(resp){
+                        console.log(resp);
+                            
+                         $(".userLogin").remove();
+                        loggedIn();
+                        }
+                    });
+                }
+                            }
+                        },error:function(resp){
+                            console.log(resp);
+                               var newDiv = document.createElement("div"); 
+                               newDiv.innerHTML = '<div class="userLogin"><div class="userLogin1"><div class="logo"><img class="doveImg" src="img/dove.png" alt="dove"/></div><input id="username" type="text" placeholder="username" autofocus/><input id="password" type="text" placeholder="password"/><br><br><button id="login">Login</button></div></div>'; document.body.appendChild(newDiv);
+                                
+                                
+                                 document.getElementById("login").onclick = function(){
+                
+                    //sending login info to the user.php
+                    $.ajax({
+                        url:"../controller/user.php",
+                        type:"post",
+                        dataType:"json",
+                        data: {
+                            method:"login",
+                            username: document.getElementById("username").value,
+                            password: document.getElementById("password").value, 
+                        },
+                        success:function(resp){
+                        console.log(resp);
+                            
+                         $(".userLogin").remove();
+                        loggedIn();
+                        }
+                    });
+                }
+                            
+                        }
+                });
+                //click function for the submit button
+               
+                var loggedIn = function(){
+                $.ajax({
+                        url:"../controller/user.php",
+                        type:"post",
+                        dataType:"json",
+                        data: {
+                            method:"getUser",
+                        },
+                        success:function(resp){
+                            // creating div for body and content
+                            var leftDiv = document.createElement("div");
+                            leftDiv.className = "leftDiv";
+                            document.body.appendChild(leftDiv);
+
+                            // div for the content in left div
+                            var leftCon = document.createElement("div");
+                            leftCon.className = "leftCon";
+                            document.body.appendChild(leftCon);
+
+                            // right div
+                            var rightDiv = document.createElement("div");
+                            rightDiv.className = "rightDiv";
+                            document.body.appendChild(rightDiv);
+
+                            // div for the content in right div
+                            var rightCon = document.createElement("div");
+                            rightCon.className = "rightCon";
+                            document.body.appendChild(rightCon);
+
+
+                            //content for the leftCon div
+                            var picDiv = document.createElement("div");
+                            picDiv.className = "picDiv";
+                            var profImg = document.createElement("img");
+                            profImg.className = "profImg";
+                            profImg.setAttribute("src", "./img/profilePicture.png");
+                            profImg.setAttribute("alt", "profilePicture");
+                            picDiv.appendChild(profImg);
+                            leftCon.appendChild(picDiv);
+
+                            var profInfo = document.createElement("div");
+                            profInfo.className = "profInfo";
+                            var profName = document.createElement("h3");
+                            profName.id = "profName";
+                            profName.innerHTML = resp[0].username;
+                            profInfo.appendChild(profName);
+                            leftCon.appendChild(profInfo);
+
+
+                            //content for the right div  which are the postings
+                            //div for posting a new post
+                            
+                            
+                            //div that displays the postings
+                            var postDiv = document.createElement("div");
+                            postDiv.id = "postDiv";
+                            rightCon.appendChild(postDiv);
+                            
+                            var postLength = 0;
+                      
+                            console.log((window.location.search).replace('?',''));
+                            $.ajax({
+                                url:"../controller/posting.php",
+                                dataType:"json",
+                                type:"POST",
+                                data:{
+                                    method:"getallbyID",
+                                    id: (window.location.search).replace('?','')
+                                    },
+                                success:function(response){
+                                    console.log(response);
+                                    var divL = document.createElement("div");
+                                    divL.innerHTML = "<span class = 'productSpan'>Description : </span>"+response[0].description+ "<br><span class = 'productSpan'>Current place : </span>"+response[0].currentPlace+"<br><span class = 'productSpan'>Destination : </span>"+response[0].destination+"<br><span class = 'productSpan'>User : </span>"+response[0].username;
+                                    postDiv.appendChild(divL);
+                                    
+
+                                }
+                            });
+                            
+                        
+                },
+                });
+            
+   
+                }
+            });
+      </script>
+   </body>
+</html>

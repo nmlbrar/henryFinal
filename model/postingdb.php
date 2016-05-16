@@ -19,6 +19,14 @@ function get_orders(){
     echo json_encode($result->fetchAll());
 }
 
+function get_ordersbyID(){
+    global $db;
+    $query = "SELECT postings.*, users.username FROM postings 
+              LEFT JOIN users ON users.id = postings.user_id WHERE postings.id = ".$_POST['id']."";
+    $result = $db->query($query);
+    echo json_encode($result->fetchAll());
+}
+
 function get_allorders(){
     global $db;
     $query = "SELECT postings.description, postings.destination, postings.currentPlace, postings.id, users.username FROM postings
