@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Feb 16, 2016 at 07:40 AM
+-- Generation Time: May 17, 2016 at 12:14 AM
 -- Server version: 5.5.41-log
 -- PHP Version: 5.6.8
 
@@ -32,7 +32,16 @@ CREATE TABLE IF NOT EXISTS `postings` (
   `destination` varchar(50) NOT NULL,
   `currentPlace` varchar(50) NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+--
+-- Dumping data for table `postings`
+--
+
+INSERT INTO `postings` (`id`, `description`, `destination`, `currentPlace`, `user_id`) VALUES
+(18, 'top  ', '  china  ', '  australia', 24),
+(19, 'box', 'desti', 'resident', 24),
+(20, 'tv', 'del', 'raj', 25);
 
 -- --------------------------------------------------------
 
@@ -45,14 +54,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `user_type` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `user_type`) VALUES
-(1, 'hey', 'hey', 'hey');
+(24, 'hey', 'hey', 'hey'),
+(25, '123', '123', '123');
 
 --
 -- Indexes for dumped tables
@@ -78,12 +88,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `postings`
 --
 ALTER TABLE `postings`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- Constraints for dumped tables
 --
@@ -92,7 +102,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- Constraints for table `postings`
 --
 ALTER TABLE `postings`
-ADD CONSTRAINT `postings_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `postings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
