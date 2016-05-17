@@ -7,7 +7,7 @@ function insert_user(){
     //insert info in the users table
     global $db;
     
-    $query = "INSERT INTO users(username, password, user_type) VALUES ('".$_POST['username']."','".$_POST['password']."','".$_POST['password']."')";
+    $query = "INSERT INTO users(username, password, email, user_type) VALUES ('".$_POST['username']."','".$_POST['password']."','".$_POST['email']."','".$_POST['user_type']."')";
     $result = $db->query($query);
 }
 

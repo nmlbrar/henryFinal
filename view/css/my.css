@@ -100,7 +100,7 @@
     margin-top:7%;
     position: relative;
     width: 350px;
-    height: 360px;
+    height: 560px;
     box-shadow: 5px 5px 25px #915271;
 }
 
@@ -110,8 +110,8 @@
     width: 350px;
     height: 500px;
     top: 120px;
-    left: 45px;
     clear:both;
+    
 }
 
 #login,#sub {
@@ -123,6 +123,7 @@
     font-size:1em;
     color:white;
     border: solid 2px rgba(119,89,82,1);
+    display: block;
 }
 
 #login:hover,#sub:hover {
@@ -141,12 +142,18 @@
     width: 38%;
     height:7%;
     border-radius:7px;
+    clear: both;
+    display: block;
+    margin: 0 auto;
 }
 #password {
     text-align: center;
     height:7%;
     width: 38%;
     border-radius:7px;
+    clear: both;
+    display: block;
+    margin: 0 auto;
 }
 .logo {
     margin: 0 auto;
@@ -187,3 +194,13 @@
 
 
 
+
+#emailStyle {
+    text-align: center;
+    height:7%;
+    width: 38%;
+    border-radius:7px;
+    clear: both;
+    margin: 0 auto;
+    display: block;
+}

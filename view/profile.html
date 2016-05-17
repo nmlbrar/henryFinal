@@ -23,11 +23,11 @@
                         },
                         success:function(resp){
                             console.log(resp);
-                           // console.log((resp == null));
+                        console.log((resp == null));
                             if(resp > 0){
                             loggedIn();
                             }
-                            if(resp == "null"){
+                            if(resp == null){
                                var newDiv = document.createElement("div"); 
                                newDiv.innerHTML = '<div class="userLogin"><div class="userLogin1"><div class="logo"><img class="doveImg" src="img/dove.png" alt="dove"/></div><input id="username" type="text" placeholder="username" autofocus/><input id="password" type="text" placeholder="password"/><br><br><button id="login">Login</button></div></div>'; document.body.appendChild(newDiv);
                                 
@@ -93,6 +93,7 @@
                             method:"getUser",
                         },
                         success:function(resp){
+                            console.log(resp);
                             // creating div for body and content
                             var leftDiv = document.createElement("div");
                             leftDiv.className = "leftDiv";
@@ -114,7 +115,7 @@
                             document.body.appendChild(rightCon);
 
 
-                            //content for the leftCon div
+                            /*content for the leftCon div
                             var picDiv = document.createElement("div");
                             picDiv.className = "picDiv";
                             var profImg = document.createElement("img");
@@ -122,7 +123,7 @@
                             profImg.setAttribute("src", "./img/profilePicture.png");
                             profImg.setAttribute("alt", "profilePicture");
                             picDiv.appendChild(profImg);
-                            leftCon.appendChild(picDiv);
+                            leftCon.appendChild(picDiv);*/
 
                             var profInfo = document.createElement("div");
                             profInfo.className = "profInfo";
