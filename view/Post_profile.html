@@ -83,6 +83,8 @@
                             
                         }
                 });
+                
+            
                 //click function for the submit button
                
                 var loggedIn = function(){
@@ -116,22 +118,21 @@
 
 
                             //content for the leftCon div
-                            var picDiv = document.createElement("div");
-                            picDiv.className = "picDiv";
-                            var profImg = document.createElement("img");
-                            profImg.className = "profImg";
-                            profImg.setAttribute("src", "./img/profilePicture.png");
-                            profImg.setAttribute("alt", "profilePicture");
-                            picDiv.appendChild(profImg);
-                            leftCon.appendChild(picDiv);
+                        
 
                             var profInfo = document.createElement("div");
                             profInfo.className = "profInfo";
-                            var profName = document.createElement("h3");
+                            var profName = document.createElement("span");
                             profName.id = "profName";
-                            profName.innerHTML = resp[0].username;
+                            profName.innerHTML = "<span class='name'>User</span>"+": "+resp[0].username+"<hr>";
                             profInfo.appendChild(profName);
                             leftCon.appendChild(profInfo);
+                            
+                            var logoutBut = document.createElement("button");
+                            logoutBut.id = "logoutBut";
+                            logoutBut.innerHTML = "LOGOUT";
+                            leftCon.appendChild(logoutBut);
+                            
 
 
                             //content for the right div  which are the postings
@@ -144,7 +145,10 @@
                             rightCon.appendChild(postDiv);
                             
                             var postLength = 0;
-                      
+                            
+                            document.getElementById("logoutBut").onclick = function(){
+                                 location.href = "../controller/logout.php";
+                            }
                             console.log((window.location.search).replace('?',''));
                             $.ajax({
                                 url:"../controller/posting.php",
@@ -156,13 +160,22 @@
                                     },
                                 success:function(response){
                                     console.log(response);
+                                    var bckDiv = document.createElement("div");
                                     var divL = document.createElement("div");
-                                    divL.innerHTML = "<span class = 'productSpan'>Description : </span>"+response[0].description+ "<br><span class = 'productSpan'>Current place : </span>"+response[0].currentPlace+"<br><span class = 'productSpan'>Destination : </span>"+response[0].destination+"<br><span class = 'productSpan'>User : </span>"+response[0].username;
+                                    bckDiv.className = "bckDiv";
+                                    bckDiv.innerHTML =  "<button id='bckH'>Back to Postings</button>";
+                                    divL.className = "divLClass";
+                                    divL.innerHTML ="<span class = 'productSpan'>Description : </span>"+response[0].description+ "<br><span class = 'productSpan'>Current place : </span>"+response[0].currentPlace+"<br><span class = 'productSpan'>Destination : </span>"+response[0].destination+"<br><span class = 'productSpan'>User : </span>"+response[0].username+"<br><span class = 'productSpan'>Email : </span>"+response[0].email;
+                                    postDiv.appendChild(bckDiv);
                                     postDiv.appendChild(divL);
-                                    
+                                    document.getElementById("bckH").onclick = function(){
+                                window.location.href = "./home.html";
+                            }
 
                                 }
                             });
+                            //back to postings function
+                            
                             
                         
                 },

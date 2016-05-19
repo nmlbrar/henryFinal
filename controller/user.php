@@ -16,4 +16,8 @@ if($_POST['method'] == "checkLogin"){
 if($_POST['method'] == "getUser"){
     getUser();
 }
+
+if($_POST['method'] == "postNew"){
+    postNew();
+}
 ?>

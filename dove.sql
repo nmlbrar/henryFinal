@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: May 17, 2016 at 12:14 AM
+-- Generation Time: May 19, 2016 at 08:21 PM
 -- Server version: 5.5.41-log
 -- PHP Version: 5.6.8
 
@@ -32,16 +32,15 @@ CREATE TABLE IF NOT EXISTS `postings` (
   `destination` varchar(50) NOT NULL,
   `currentPlace` varchar(50) NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `postings`
 --
 
 INSERT INTO `postings` (`id`, `description`, `destination`, `currentPlace`, `user_id`) VALUES
-(18, 'top  ', '  china  ', '  australia', 24),
-(19, 'box', 'desti', 'resident', 24),
-(20, 'tv', 'del', 'raj', 25);
+(1, 'lahiru', 'van', 'srilanka', 1),
+(2, 'music kit ', ' banglore ', ' vancouver', 2);
 
 -- --------------------------------------------------------
 
@@ -53,16 +52,17 @@ CREATE TABLE IF NOT EXISTS `users` (
 `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `user_type` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+  `user_type` varchar(50) NOT NULL,
+  `email` varchar(99) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `user_type`) VALUES
-(24, 'hey', 'hey', 'hey'),
-(25, '123', '123', '123');
+INSERT INTO `users` (`id`, `username`, `password`, `user_type`, `email`) VALUES
+(1, 'lahiru', 'hey', '1', 'hey@hey.com'),
+(2, '123', '123', '1', '123@123.ca');
 
 --
 -- Indexes for dumped tables
@@ -88,12 +88,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `postings`
 --
 ALTER TABLE `postings`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --

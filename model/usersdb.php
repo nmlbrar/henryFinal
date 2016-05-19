@@ -32,6 +32,18 @@ function get_user_by_username_password(){
     
 }
 
+function postNew(){
+
+    //this will insert the new username os the logged in user
+    global $db;
+    $query = "  UPDATE users 
+                SET username = '".$_POST['username']."' WHERE id =".$_POST['id']."";
+    echo $query;
+    $result = $db->query($query);
+    
+    
+}
+
 function checkLogin(){
     echo json_encode($_SESSION['id']);
 }

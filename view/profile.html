@@ -1,5 +1,5 @@
 <html>
-    <head>
+<head>
         <title>Profile</title>
         <!--linking CSS-->
         <link rel="stylesheet" type="text/css" href="css/my.css">
@@ -7,9 +7,13 @@
     </head>
     <body class="body">
         
-        
+        <button id="homeButt">Home</button>
         <script>
             $(document).ready(function(){
+                
+            document.getElementById("homeButt").onclick = function(){
+                location.href = "./home.html";
+            };
                 var update = false;
                 var user_id = -1;
                 
@@ -127,9 +131,9 @@
 
                             var profInfo = document.createElement("div");
                             profInfo.className = "profInfo";
-                            var profName = document.createElement("h3");
+                            var profName = document.createElement("span");
                             profName.id = "profName";
-                            profName.innerHTML = resp[0].username;
+                            profName.innerHTML = "<span class='name'>User</span>"+": "+resp[0].username+"<br>"+"<span class='name'>Email</span>"+": "+resp[0].email;
                             profInfo.appendChild(profName);
                             leftCon.appendChild(profInfo);
 
@@ -162,6 +166,16 @@
                             postBtn.id = "post";
                             newPostDiv.appendChild(postBtn);
                             
+                            //back to posting button
+                            var divL = document.createElement("div");
+                            divL.innerHTML =  "<button id='bckH'>Back to Home</button>";
+                            divL.className = "divLClassP";
+                            newPostDiv.appendChild(divL);
+                            
+                            document.getElementById("bckH").onclick = function(){
+                                window.location.href = "./home.html";
+                            }
+                            
                             var updateDiv = document.createElement("div");
                             updateDiv.id = "update";
                             var updateBut = document.createElement("button");
@@ -169,6 +183,12 @@
                             updateBut.id = "update_but";
                             newPostDiv.appendChild(updateBut);
                             newPostDiv.appendChild(updateDiv);
+                            
+                            var editProfile = document.createElement("button");
+                            editProfile.id = "editBut";
+                            editProfile.className = "editButt";
+                            editProfile.innerHTML = "Edit Profile";
+                            leftCon.appendChild(editProfile);
                             
                             var logoutBut = document.createElement("button");
                             logoutBut.id = "logoutBut";
@@ -187,10 +207,52 @@
                             
                             var postLength = 0;
 
-                            console.log("here");
                             document.getElementById("logoutBut").onclick = function(){
                                  location.href = "../controller/logout.php";
                             }
+var edit = false;
+                            document.getElementById("editBut").onclick = function(){
+                                
+                                if(edit==false){
+                                    console.log("false");
+                                    editProfile.innerHTML = "Done";
+                                    var newName = document.createElement("input");
+                                    newName.id = "newName";
+                                    newName.placeholder = "New username";
+                                    leftCon.appendChild(newName);
+
+                                    newName.onclick = function(){
+                                        newName.placeholder = "";
+                                    }
+                                    edit=true;
+                                }else if(edit==true){
+                                    
+                                    console.log("true");
+                                    console.log(resp);
+                                    editProfile.innerHTML = "Edit Profile";
+                                    
+                                    //ajax call
+                                    $.ajax({
+                                        url:"../controller/user.php",
+                                        type:"post",
+                                        dataType:"html",
+                                        data: {
+                                            method:"postNew",
+                                            username: document.getElementById("newName").value,
+                                            id:resp[0].id
+                                        },
+                                        success:function(resp){
+                                            alert("INSERT");
+                                            console.log(resp);
+                                        }
+                                    });
+                                    edit=false;
+                                }  
+                                
+                            };
+                            
+                            
+                            
                             setInterval(function(){ 
                                
                             $.ajax({
@@ -239,7 +301,7 @@
                                     }
                                 }
                             });
-                            },2000);
+                            },200000);
                             
                             //ajax call for posting the new post
                             document.getElementById("post").onclick = function(){
@@ -293,5 +355,6 @@
                 }
             });
       </script>
-   </body>
+   </div>
+</body>
 </html>

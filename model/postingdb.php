@@ -21,7 +21,7 @@ function get_orders(){
 
 function get_ordersbyID(){
     global $db;
-    $query = "SELECT postings.*, users.username FROM postings 
+    $query = "SELECT postings.*, users.username, users.email FROM postings 
               LEFT JOIN users ON users.id = postings.user_id WHERE postings.id = ".$_POST['id']."";
     $result = $db->query($query);
     echo json_encode($result->fetchAll());
